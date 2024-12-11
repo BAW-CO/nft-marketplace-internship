@@ -22,6 +22,7 @@ function HotCollections() {
       992: { items: 4 }
     }
   }), []);
+
   
 
   useEffect(() => {
@@ -57,21 +58,14 @@ function HotCollections() {
                 <div className="small-border bg-color-2"></div>
               </div>
             </div>
-            <OwlCarousel className='owl-theme' {...options}>
-                  {loading ? (
-              // Skeleton loading items
-              Array(4).fill(0).map((_, index) => (
-                <div className="lg-3 md-6 sm-6 xs-12" key={`skeleton-${index}`}>
-                  <HotSkeleton />
-                </div>
-              ))
-            ) : (
-                    collections.map((collection) => (
-                      <div className="lg-3 md-6 sm-6 xs-12" key={collection.id}>
+            {!loading && collections.length > 0 && (
+              <OwlCarousel className='owl-theme' {...options}>
+                {collections.map((collection) => (
+                  <div className="lg-3 md-6 sm-6 xs-12" key={collection.id}>
                     <div className="nft_coll">
                       <div className="nft_wrap">
-                      <Link to={`/item-details/${collection.id}`}>
-                        <img src={collection.nftImage || nftImage} className="lazy img-fluid" alt={collection.name} />
+                        <Link to={`/item-details/${collection.id}`}>
+                          <img src={collection.nftImage || nftImage} className="lazy img-fluid" alt={collection.name} />
                         </Link>
                       </div>
                       <div className="nft_coll_pp">
@@ -88,13 +82,22 @@ function HotCollections() {
                       </div>
                     </div>
                   </div>
-                  ))
-                )}
-            </OwlCarousel>
+                ))}
+              </OwlCarousel>
+            )}
+            {loading && (
+              <div className="d-flex flex-wrap">
+                {Array(4).fill(0).map((_, index) => (
+                  <div className="col-lg-3 col-md-6 col-sm-6 col-12" key={`skeleton-${index}`}>
+                    <HotSkeleton />
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
-      </div>
+        </div>
     </section>
   );
-}
+};
 
 export default HotCollections;
