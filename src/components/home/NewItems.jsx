@@ -2,8 +2,52 @@ import React from "react";
 import { Link } from "react-router-dom";
 import AuthorImage from "../../images/author_thumbnail.jpg";
 import nftImage from "../../images/nftImage.jpg";
+import { useState, useEffect, useMemo } from 'react';
+import { getNewItems } from "../../api/newItems";
+import OwlCarousel from 'react-owl-carousel';
+import HotSkeleton from "../UI/HotSkeleton";
+import Countdown from "../../api/countDown";
 
-const NewItems = () => {
+function NewItems() {
+  const [loading, setLoading] = useState(true);
+  const [collections, setCollections] = useState([]);
+
+  const options = useMemo(() => ({
+    loop: true,
+    margin: 10,
+    nav: true,
+    responsive: {
+      0: { items: 1 },
+      576: { items: 2 },
+      768: { items: 2 },
+      992: { items: 4 }
+    }
+  }), []);
+
+  
+
+  useEffect(() => {
+    const fetchCollections = async () => {
+      console.log('Fetching started');
+      try {
+        const data = await getNewItems();
+        console.log('Data received:', data);
+        setCollections(data);
+      } catch (error) {
+        console.error('Fetch error:', error); 
+      } finally {
+        console.log('Setting loading to false');
+        setLoading(false);
+      }
+    };
+  
+    fetchCollections();
+  }, []);
+  
+  console.log('Current state:', { loading, collections });
+
+
+
   return (
     <section id="section-items" className="no-bottom">
       <div className="container">
@@ -14,8 +58,10 @@ const NewItems = () => {
               <div className="small-border bg-color-2"></div>
             </div>
           </div>
-          {new Array(4).fill(0).map((_, index) => (
-            <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12" key={index}>
+          {!loading && collections.length > 0 && (
+            <OwlCarousel className='owl-theme' {...options}>
+          {collections.map((collection) => (
+            <div className="lg-3 md-6 sm-6 xs-12" key={collection.id}>
               <div className="nft__item">
                 <div className="author_list_pp">
                   <Link
@@ -24,11 +70,11 @@ const NewItems = () => {
                     data-bs-placement="top"
                     title="Creator: Monica Lucas"
                   >
-                    <img className="lazy" src={AuthorImage} alt="" />
+                    <img className="lazy" src={collection.authorImage || AuthorImage} alt="" />
                     <i className="fa fa-check"></i>
                   </Link>
                 </div>
-                <div className="de_countdown">5h 30m 32s</div>
+                  <Countdown expiryDate={collection.expiryDate}/>
 
                 <div className="nft__item_wrap">
                   <div className="nft__item_extra">
@@ -51,7 +97,7 @@ const NewItems = () => {
 
                   <Link to="/item-details">
                     <img
-                      src={nftImage}
+                      src={collection.nftImage || nftImage}
                       className="lazy nft__item_preview"
                       alt=""
                     />
@@ -59,17 +105,28 @@ const NewItems = () => {
                 </div>
                 <div className="nft__item_info">
                   <Link to="/item-details">
-                    <h4>Pinky Ocean</h4>
+                    <h4>{collection.title}</h4>
                   </Link>
-                  <div className="nft__item_price">3.08 ETH</div>
+                  <div className="nft__item_price">{collection.price}</div>
                   <div className="nft__item_like">
                     <i className="fa fa-heart"></i>
-                    <span>69</span>
+                    <span>{collection.likes}</span>
                   </div>
                 </div>
               </div>
             </div>
           ))}
+          </OwlCarousel>
+        )}
+        {loading && (
+          <div className="d-flex flex-wrap">
+            {Array(4).fill(0).map((_, index) => (
+              <div className="col-lg-3 col-md-6 col-sm-6 col-12" key={`skeleton-${index}`}>
+                <HotSkeleton />
+              </div>
+            ))}
+          </div>
+        )}
         </div>
       </div>
     </section>
