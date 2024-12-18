@@ -13274,6 +13274,13 @@ a.read_more i {
   right: 5px;
 }
 
+.nft_coll:hover,
+.opt-create:hover {
+  -webkit-box-shadow: 2px 2px 30px 0px rgba(20, 20, 20, 0.1);
+  -moz-box-shadow: 2px 2px 30px 0px rgba(20, 20, 20, 0.1);
+  box-shadow: 2px 2px 30px 0px rgba(20, 20, 20, 0.1);
+}
+
 .author_list {
   -moz-column-count: 4;
   -moz-column-gap: 20px;
@@ -13603,7 +13610,7 @@ a.read_more i {
 }
 
 .item_info .de_countdown .countdown-section {
-  font-size: 16px;
+  font-size: 12px;
 }
 
 .item_info h2 {
@@ -14137,6 +14144,18 @@ a.read_more i {
   margin-left: 0;
   margin-right: 10px;
 }
+
+.countdown-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.countdown-item {
+  text-align: center;
+  min-width: 40px;
+}
+
 
 .de_countdown {
   position: absolute;

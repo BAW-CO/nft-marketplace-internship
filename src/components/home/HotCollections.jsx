@@ -33,7 +33,7 @@ function HotCollections() {
         console.log('Data received:', data);
         setCollections(data);
       } catch (error) {
-        console.error('Fetch error:', error); // Add error logging
+        console.error('Fetch error:', error); 
       } finally {
         console.log('Setting loading to false');
         setLoading(false);
@@ -43,7 +43,6 @@ function HotCollections() {
     fetchCollections();
   }, []);
   
-  // Add log before render
   console.log('Current state:', { loading, collections });
   
 
