@@ -5,7 +5,7 @@ import nftImage from "../../images/nftImage.jpg";
 import { useState, useEffect, useMemo } from 'react';
 import { getNewItems } from "../../api/newItems";
 import OwlCarousel from 'react-owl-carousel';
-import HotSkeleton from "../UI/HotSkeleton";
+import NewSkeleton from "../UI/NewSkeleton";
 import Countdown from "../../api/countDown";
 
 function NewItems() {
@@ -122,7 +122,7 @@ function NewItems() {
           <div className="d-flex flex-wrap">
             {Array(4).fill(0).map((_, index) => (
               <div className="col-lg-3 col-md-6 col-sm-6 col-12" key={`skeleton-${index}`}>
-                <HotSkeleton />
+                <NewSkeleton />
               </div>
             ))}
           </div>
