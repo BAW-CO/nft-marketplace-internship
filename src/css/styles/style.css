@@ -3455,6 +3455,13 @@ hr {
   margin: 40px 0 40px 0;
 }
 
+.filter-by {
+  margin-bottom: 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  padding: 4px;
+}
+
 /* dropcap */
 
 /* ------------------------------ */
