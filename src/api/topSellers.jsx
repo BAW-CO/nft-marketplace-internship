@@ -8,7 +8,7 @@ export const getTopSellers = async () => {
     return response.data;
     
   } catch (error) {
-    console.error('Error fetching new items:', error);
+    console.error('Error fetching Top Sellers:', error);
     throw error;
   }
 };
