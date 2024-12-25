@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import AuthorImage from "../../images/author_thumbnail.jpg";
-import nftImage from "../../images/nftImage.jpg";
 import { getExplore } from "../../api/explore";
 import Countdown from "../../api/countDown";
 import { useState, useEffect } from 'react';
@@ -65,14 +64,14 @@ console.log('Current state:', { loading, collections });
           >
             <div className="nft__item">
               <div className="author_list_pp">
-                <Link
-                  to="/author"
-                  data-bs-toggle="tooltip"
-                  data-bs-placement="top"
-                >
-                  <img className="lazy" src={collection.authorImage || AuthorImage} alt="" />
-                  <i className="fa fa-check"></i>
-                </Link>
+              <Link 
+                to={`/author/${collection.authorId}`}
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+              >
+                <img className="lazy" src={collection.authorImage || AuthorImage} alt="" />
+                <i className="fa fa-check"></i>
+              </Link>
               </div>
               <Countdown expiryDate={collection.expiryDate}/>
 
