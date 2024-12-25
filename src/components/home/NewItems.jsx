@@ -64,8 +64,7 @@ function NewItems() {
             <div className="lg-3 md-6 sm-6 xs-12" key={collection.id}>
               <div className="nft__item">
                 <div className="author_list_pp">
-                  <Link
-                    to="/author"
+                <Link to={`/author/${collection.authorId}`}
                     data-bs-toggle="tooltip"
                     data-bs-placement="top"
                     title="Creator: Monica Lucas"
