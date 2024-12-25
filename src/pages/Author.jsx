@@ -1,17 +1,31 @@
 import React from "react";
 import AuthorBanner from "../images/author_banner.jpg";
-// import AuthorItems from "../components/author/AuthorItems";
+import AuthorItems from "../components/author/AuthorItems";
 import { Link } from "react-router-dom";
 import AuthorImage from "../images/author_thumbnail.jpg";
 import { useState, useEffect } from 'react';
 import { getAuthor } from "../api/getAuthor";
-// import HotSkeleton from "../components/UI/HotSkeleton";
 import { useParams } from "react-router-dom";
 
 function Author() {
   const [loading, setLoading] = useState(true);
   const [collections, setCollections] = useState([]);
   const { id } = useParams();
+  const [isFollowing, setIsFollowing] = useState(false);
+  const [followerCount, setFollowerCount] = useState(0);
+
+  useEffect(() => {
+    setFollowerCount(collections.followers);
+  }, [collections]);
+  
+  const handleFollowClick = () => {
+    if (isFollowing) {
+      setFollowerCount(prev => prev - 1);
+    } else {
+      setFollowerCount(prev => prev + 1);
+    }
+    setIsFollowing(!isFollowing);
+  };
 
   useEffect(() => {
     const fetchCollections = async () => {
@@ -42,7 +56,9 @@ function Author() {
           id="profile_banner"
           aria-label="section"
           className="text-light"
-          style={{ background: `url(${AuthorBanner}) top` }}
+          style={{ 
+            background: `url(${collections?.nftCollection?.[0]?.nftImage || AuthorBanner}) top` 
+          }}
         ></section>
         <section aria-label="section">
           <div className="container">
@@ -69,13 +85,17 @@ function Author() {
                   </div>
                   <div className="profile_follow de-flex">
                     <div className="de-flex-col">
-                      <div className="profile_follower">{collections.followers} followers</div>
-                      <Link to="#" className="btn-main">
-                        Follow
-                      </Link>
+                      <div className="profile_follower">{followerCount} followers</div>
+                      <button 
+                        className={`btn-main ${isFollowing ? 'following' : ''}`}
+                        onClick={handleFollowClick}
+                      >
+                        {isFollowing ? 'Unfollow' : 'Follow'}
+                      </button>
                     </div>
                   </div>
                 </div>
+                <AuthorItems authorImage={collections.authorImage} />
               </div>
             </div>
           </div>

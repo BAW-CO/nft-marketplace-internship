@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import AuthorImage from "../../images/author_thumbnail.jpg";
-import nftImage from "../../images/nftImage.jpg";
 import { getExplore } from "../../api/explore";
 import Countdown from "../../api/countDown";
 import { useState, useEffect } from 'react';
