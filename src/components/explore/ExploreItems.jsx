@@ -22,27 +22,18 @@ function ExploreItems() {
     setCollections(data);
   };
   
-
-
 useEffect(() => {
   const fetchCollections = async () => {
-    console.log('Fetching started');
     try {
       const data = await getExplore();
-      console.log('Data received:', data);
       setCollections(data);
     } catch (error) {
-      console.error('Fetch error:', error); 
     } finally {
-      console.log('Setting loading to false');
       setLoading(false);
     }
   };
-
   fetchCollections();
 }, []);
-
-console.log('Current state:', { loading, collections });
 
 
   return (
@@ -93,12 +84,12 @@ console.log('Current state:', { loading, collections });
                     </div>
                   </div>
                 </div>
-                <Link to="/item-details">
+                <Link to={`/item-details/${collection.nftId}`}>
                   <img src={collection.nftImage} className="lazy nft__item_preview" alt="" />
                 </Link>
               </div>
               <div className="nft__item_info">
-                <Link to="/item-details">
+                <Link to={`/item-details/${collection.nftId}`}>
                   <h4>{collection.title}</h4>
                 </Link>
                 <div className="nft__item_price">{collection.price} ETH</div>
