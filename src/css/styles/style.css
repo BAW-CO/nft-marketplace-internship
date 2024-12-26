@@ -13601,8 +13601,9 @@ a.read_more i {
 }
 
 .item_info h6 {
-  margin-bottom: 15px;
+  margin-bottom: 4px;
   font-size: 14px;
+  margin-top: 24px;
 }
 
 .item_info .de_countdown {
@@ -13823,6 +13824,7 @@ a.read_more i {
   z-index: 3;
   background: rgba(255, 255, 255, 0.8);
   border-radius: 5px;
+  top: 0;
   left: 0;
   display: table;
   transform: scale(1.03);
@@ -13838,8 +13840,12 @@ a.read_more i {
 }
 
 .nft__item_buttons {
-  display: table-cell;
-  vertical-align: middle;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  gap: 10px;
 }
 
 .nft__item_extra button {
@@ -13851,6 +13857,10 @@ a.read_more i {
   font-weight: bold;
   border-radius: 5px;
   font-size: 12px;
+}
+
+.nft__item_wrap:hover .nft__item_extra {
+  display: block;
 }
 
 .dark-scheme .nft__item_extra button {

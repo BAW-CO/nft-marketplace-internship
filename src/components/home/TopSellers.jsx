@@ -24,15 +24,11 @@ function TopSellers() {
 
 useEffect(() => {
   const fetchCollections = async () => {
-    console.log('Fetching started');
     try {
       const data = await getTopSellers();
-      console.log('Data received:', data);
       setCollections(data);
     } catch (error) {
-      console.error('Fetch error:', error); 
     } finally {
-      console.log('Setting loading to false');
       setLoading(false);
     }
   };
@@ -40,7 +36,6 @@ useEffect(() => {
   fetchCollections();
 }, []);
 
-console.log('Current state:', { loading, collections });
 
   return (
     <section id="section-popular" className="pb-5">

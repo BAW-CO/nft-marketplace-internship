@@ -6,10 +6,12 @@ import { useState, useEffect, useMemo } from 'react';
 import { getHotCollections } from "../../api/hotCollections";
 import OwlCarousel from 'react-owl-carousel';
 import HotSkeleton from "../UI/HotSkeleton";
+import { useParams } from "react-router-dom";
 
 function HotCollections() {
   const [loading, setLoading] = useState(true);
   const [collections, setCollections] = useState([]);
+  const { id } = useParams();
 
   const options = useMemo(() => ({
     loop: true,
@@ -23,19 +25,15 @@ function HotCollections() {
     }
   }), []);
 
-  
 
   useEffect(() => {
     const fetchCollections = async () => {
-      console.log('Fetching started');
       try {
         const data = await getHotCollections();
-        console.log('Data received:', data);
         setCollections(data);
       } catch (error) {
         console.error('Fetch error:', error); 
       } finally {
-        console.log('Setting loading to false');
         setLoading(false);
       }
     };
@@ -43,10 +41,6 @@ function HotCollections() {
     fetchCollections();
   }, []);
   
-  console.log('Current state:', { loading, collections });
-  
-
- 
   return (
     <section id="section-collections" className="no-bottom">
         <div className="container">
@@ -63,7 +57,7 @@ function HotCollections() {
                   <div className="lg-3 md-6 sm-6 xs-12" key={collection.id}>
                     <div className="nft_coll">
                       <div className="nft_wrap">
-                        <Link to={`/item-details/${collection.id}`}>
+                        <Link to={`/item-details/${collection.nftId}`}>
                           <img src={collection.nftImage || nftImage} className="lazy img-fluid" alt={collection.name} />
                         </Link>
                       </div>

@@ -24,19 +24,15 @@ function NewItems() {
     }
   }), []);
 
-  
 
   useEffect(() => {
     const fetchCollections = async () => {
-      console.log('Fetching started');
       try {
         const data = await getNewItems();
-        console.log('Data received:', data);
         setCollections(data);
       } catch (error) {
         console.error('Fetch error:', error); 
       } finally {
-        console.log('Setting loading to false');
         setLoading(false);
       }
     };
@@ -44,9 +40,6 @@ function NewItems() {
     fetchCollections();
   }, []);
   
-  console.log('Current state:', { loading, collections });
-
-
 
   return (
     <section id="section-items" className="no-bottom">
@@ -94,7 +87,7 @@ function NewItems() {
                     </div>
                   </div>
 
-                  <Link to="/item-details">
+                  <Link to={`/item-details/${collection.nftId}`}>
                     <img
                       src={collection.nftImage || nftImage}
                       className="lazy nft__item_preview"
@@ -103,7 +96,7 @@ function NewItems() {
                   </Link>
                 </div>
                 <div className="nft__item_info">
-                  <Link to="/item-details">
+                  <Link to={`/item-details/${collection.nftid}`}>
                     <h4>{collection.title}</h4>
                   </Link>
                   <div className="nft__item_price">{collection.price}</div>

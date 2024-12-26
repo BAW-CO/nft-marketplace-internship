@@ -10,6 +10,7 @@ function AuthorItems({ authorImage }) {
   const [loading, setLoading] = useState(true);
   const [collections, setCollections] = useState([]);
   const { id } = useParams();
+  const [error, setError] = useState(null);
 
     useEffect(() => {
     const fetchCollections = async () => {
@@ -26,8 +27,9 @@ function AuthorItems({ authorImage }) {
     fetchCollections();
   }, [id]);
   
-  console.log('Current state:', { loading, collections });
+  
 
+  if (error) return <div>Something went wrong</div>;
   if (loading) {
     return (
       <div className="d-flex flex-wrap">
@@ -39,6 +41,9 @@ function AuthorItems({ authorImage }) {
       </div>
     );
   }
+
+  if (!collections?.length) return <div>No items found</div>;
+  return (
     <div className="de_tab_content">
       <div className="tab-1">
         <div className="row">
@@ -93,6 +98,7 @@ function AuthorItems({ authorImage }) {
         </div>
       </div>
     </div>
+  );
 }
 
 export default AuthorItems;

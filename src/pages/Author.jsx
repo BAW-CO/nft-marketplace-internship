@@ -6,6 +6,7 @@ import AuthorImage from "../images/author_thumbnail.jpg";
 import { useState, useEffect } from 'react';
 import { getAuthor } from "../api/getAuthor";
 import { useParams } from "react-router-dom";
+import { useLocation } from 'react-router-dom';
 
 function Author() {
   const [loading, setLoading] = useState(true);
@@ -29,15 +30,11 @@ function Author() {
 
   useEffect(() => {
     const fetchCollections = async () => {
-      console.log('Fetching started');
       try {
         const data = await getAuthor(id);
-        console.log('Data received:', data);
         setCollections(data);
       } catch (error) {
-        console.error('Fetch error:', error); 
       } finally {
-        console.log('Setting loading to false');
         setLoading(false);
       }
     };
@@ -45,8 +42,7 @@ function Author() {
     fetchCollections();
   }, [id]);
   
-  console.log('Current state:', { loading, collections });
-  console.log(collections) 
+  
 
   return (
     <div id="wrapper">
