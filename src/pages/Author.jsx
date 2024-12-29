@@ -1,12 +1,11 @@
 import React from "react";
 import AuthorBanner from "../images/author_banner.jpg";
 import AuthorItems from "../components/author/AuthorItems";
-import { Link } from "react-router-dom";
 import AuthorImage from "../images/author_thumbnail.jpg";
 import { useState, useEffect } from 'react';
 import { getAuthor } from "../api/getAuthor";
 import { useParams } from "react-router-dom";
-import { useLocation } from 'react-router-dom';
+import Skeleton from "../components/UI/Skeleton";
 
 function Author() {
   const [loading, setLoading] = useState(true);
@@ -43,7 +42,43 @@ function Author() {
   }, [id]);
   
   
-
+  if (loading) {
+    return (
+      <div id="wrapper">
+        <div className="no-bottom no-top" id="content">
+          <div id="top"></div>
+          <section id="profile_banner" className="text-light">
+            <Skeleton height="300px" width="100%" />
+          </section>
+          <section aria-label="section">
+            <div className="container">
+              <div className="row">
+                <div className="col-md-12">
+                  <div className="d_profile de-flex">
+                    <div className="de-flex-col">
+                      <div className="profile_avatar">
+                        <Skeleton height="150px" width="150px" borderRadius="50%" />
+                      </div>
+                    </div>
+                    <div className="profile_follow de-flex">
+                      <Skeleton height="40px" width="200px" />
+                    </div>
+                  </div>
+                  <div className="row">
+                    {[1, 2, 3, 4].map((item) => (
+                      <div key={item} className="col-lg-3 col-md-6 col-sm-6">
+                        <Skeleton height="300px" width="100%" />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    );
+  }
   return (
     <div id="wrapper">
       <div className="no-bottom no-top" id="content">

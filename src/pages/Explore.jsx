@@ -15,6 +15,7 @@ const Explore = () => {
         <section
           id="subheader"
           className="text-light"
+          data-aos="fade-up-right"
           style={{ background: `url("${SubHeader}") top` }}
         >
           <div className="center-y relative text-center">

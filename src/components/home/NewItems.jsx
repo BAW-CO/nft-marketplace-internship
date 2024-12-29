@@ -42,7 +42,7 @@ function NewItems() {
   
 
   return (
-    <section id="section-items" className="no-bottom">
+    <section id="section-items" className="no-bottom" data-aos="fade-up-right">
       <div className="container">
         <div className="row">
           <div className="col-lg-12">
