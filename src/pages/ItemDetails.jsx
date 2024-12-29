@@ -65,7 +65,7 @@ function ItemDetails() {
                   </p>
                   <div className="d-flex flex-row">
                     <div className="mr40">
-                      <h6>Owner</h6>
+                      <h6>Owner: {collections.ownerName}</h6>
                       <div className="item_author">
                         <div className="author_list_pp">
                           <Link to={`/author/${collections.ownerId}`}>
@@ -83,7 +83,7 @@ function ItemDetails() {
                   </div>
                   <div className="de_tab tab_simple">
                     <div className="de_tab_content">
-                      <h6>Creator</h6>
+                      <h6>Creator: {collections.creatorName}</h6>
                       <div className="item_author">
                         <div className="author_list_pp">
                         <Link to={`/author/${collections.ownerId}`}>
